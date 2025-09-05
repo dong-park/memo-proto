@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App-specific tweaks */
+/* Use light color scheme to avoid UA dark defaults on form controls */
+:root {
+  color-scheme: light;
+  --editor-bg: #3a3a3a; /* pure black to avoid banding */
+  --editor-fg: #d1d5db; /* Tailwind gray-300 */
+}
+
+/* Ensure full-viewport canvas in Electron */
+html, body, #root {
+  height: 100dvh;
+  width: 100vw;
+  margin: 0;
+  background-color: var(--editor-bg);
+  color: var(--editor-fg);
+}
+body { overflow: hidden; }
+
+/* Ensure textarea doesn't pick UA dark background */
+textarea {
+  background-color: var(--editor-bg) !important;
+  color: var(--editor-fg) !important;
+  background-attachment: local; /* paint background in scrollable content area */
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  box-shadow: none;
+  background-image: none;
+  caret-color: var(--editor-fg);
+  transform: translateZ(0); /* promote to its own layer to avoid seams */
+  backface-visibility: hidden;
+}
+
+/* Default colors are set via classes in HTML/React; no @apply here to keep v4 happy */
+
+@layer utilities {
+  /* Electron drag helpers */
+  .-webkit-app-region-drag { -webkit-app-region: drag; }
+  .-webkit-app-region-no-drag { -webkit-app-region: no-drag; }
+}
+
+/* macOS traffic-light glyph visibility */
+.traffic-btn .glyph {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+.traffic-btn:hover .glyph {
+  opacity: 0.8;
+}
+
+/* Hide scrollbars but keep scrolling */
+.scrollbar-none {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;            /* Chrome, Safari, Opera */
+}
