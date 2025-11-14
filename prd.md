@@ -21,6 +21,7 @@ memo-proto/
 
 **현재 기능**
 - macOS 스타일 트래픽 라이트 (Close, Minimize, Maximize)
+
 - 파일 열기/저장/다른 이름으로 저장
 - 자동 숨김 툴바 (상단 30px 호버 시 표시)
 - Dirty state 추적 (수정 여부 표시)
